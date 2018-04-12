@@ -18,11 +18,11 @@ public class PlayerPivot : MonoBehaviour {
 	{
 		if (Input.GetKey (KeyCode.Mouse0)) 
 		{
-			transform.RotateAround(player.position, Vector3.back, 100 * Time.deltaTime);
+			transform.RotateAround(player.position, Vector3.forward, 100 * Time.deltaTime);
 		}
 		if (Input.GetKey (KeyCode.Mouse1)) 
 		{
-			transform.RotateAround (player2.position, Vector3.forward, 100 * Time.deltaTime);
+			transform.RotateAround (player2.position, Vector3.forward, -100 * Time.deltaTime);
 		}	
 	}
 }
