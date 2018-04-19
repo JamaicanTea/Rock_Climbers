@@ -8,8 +8,8 @@ public class LedgeSpawner : MonoBehaviour {
 	Vector3[] pos;
 	public int ledgeOnGrid = 400;
 	public int trapLedgeOnGrid = 60;
-	public int gridWidth = 45;
-	public int gridHeight= 65;
+	public int gridWidth = 60;
+	public int gridHeight= 80;
 
 	// Use this for initialization
 	void Start () 

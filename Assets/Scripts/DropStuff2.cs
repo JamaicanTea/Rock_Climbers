@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropStuff : MonoBehaviour {
+public class DropStuff2 : MonoBehaviour {
 	public GameObject projectile;
 	public GameObject dropPanel;
 	public float projSpeed = 20f;
 	public float shootTime =0f;
-	public float shootDelay =0f;
+	public float shootDelay =0.5f;
 
 	// Use this for initialization
 	void Start () 
 	{
 		InvokeRepeating ("Shoot", shootTime, shootDelay);
 	}
-	
+
 	// Update is called once per frame
 	void Shoot () 
 	{

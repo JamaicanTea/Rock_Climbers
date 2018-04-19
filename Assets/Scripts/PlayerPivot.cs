@@ -6,14 +6,21 @@ using UnityEngine.UI;
 public class PlayerPivot : MonoBehaviour {
 	public Transform player;
 	public Transform player2;
-	public bool movingLeft = false;
-	public bool movingRight = false;
 	public int life = 3;
 	public float score = 0f;
 	public Text scoreCount;
 	public Text lifeCount;
+	public GameObject retry;
+	public GameObject returnToMenu;
+	public GameObject gameOver;
+	public bool movingLeft = false;
+	public bool movingRight = false;
 
 	// Use this for initialization
+	void Awake()
+	{
+		Time.timeScale = 1;
+	}
 	void Start () 
 	{
 		scoreCount.text = "Score =" + score;
@@ -25,22 +32,58 @@ public class PlayerPivot : MonoBehaviour {
 	{
 		score += Time.deltaTime;
 		UpdateScore ();
+
+		if (life <= 0) 
+		{
+			GameOver ();
+		}
+	}
+
+	void OnTriggerEnter (Collider col)
+	{
+		if (col.CompareTag("Hazard"))
+			{
+			life--;
+			UpdateLife ();
+			}
 	}
 
 	void UpdateScore()
 	{
 		scoreCount.text = "Score =" + score.ToString ("####");
 	}
+	void UpdateLife()
+	{
+		lifeCount.text = "Lives :" + life;
+	}
 
+	void GameOver()
+	{
+		Time.timeScale = 0;
+		gameOver.gameObject.SetActive (true);
+		retry.gameObject.SetActive (true);
+		returnToMenu.gameObject.SetActive (true);
+	}
+		
 	void FixedUpdate () 
 	{
 		if (Input.GetKey (KeyCode.Mouse0)) 
 		{
-			transform.RotateAround(player.position, Vector3.forward, 100 * Time.deltaTime);
+			movingLeft = true;
+			transform.RotateAround (player.position, Vector3.forward, 100 * Time.deltaTime);
+		} 
+		else if (Input.GetKeyUp (KeyCode.Mouse0))
+		{
+			movingLeft = false;
 		}
 		if (Input.GetKey (KeyCode.Mouse1)) 
 		{
+			movingRight = true;
 			transform.RotateAround (player2.position, Vector3.forward, -100 * Time.deltaTime);
 		}	
+		else if (Input.GetKeyUp (KeyCode.Mouse1))
+		{
+			movingRight = false;
+		}
 	}
 }
