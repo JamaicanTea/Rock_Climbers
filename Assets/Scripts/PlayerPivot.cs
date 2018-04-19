@@ -15,6 +15,8 @@ public class PlayerPivot : MonoBehaviour {
 	public GameObject gameOver;
 	public bool movingLeft = false;
 	public bool movingRight = false;
+	Coroutine invuln;
+	public CapsuleCollider colly;
 
 	// Use this for initialization
 	void Awake()
@@ -45,6 +47,7 @@ public class PlayerPivot : MonoBehaviour {
 			{
 			life--;
 			UpdateLife ();
+			invuln = StartCoroutine (Invulnerability());
 			}
 	}
 
@@ -85,5 +88,14 @@ public class PlayerPivot : MonoBehaviour {
 		{
 			movingRight = false;
 		}
+			
+	}
+	IEnumerator Invulnerability ()
+	{
+		colly.enabled = false;
+		print ("ow!");
+		yield return new WaitForSeconds (1.5f);
+		print ("k im fine!");
+		colly.enabled = true;
 	}
 }
